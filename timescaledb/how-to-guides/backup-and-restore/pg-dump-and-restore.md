@@ -20,6 +20,10 @@ example, to backup a database named `exampledb`:
 pg_dump -Fc -f exampledb.bak exampledb
 ```
 
+You might see some errors when running `pg_dump`. To learn if they can be safely
+ignored, see the
+[troubleshooting section](#troubleshooting).
+
 <highlight type="warning">
 Do not use the `pg_dump` command to backup individual hypertables. Dumps created
 using this method lack the necessary information to correctly restore the
@@ -114,6 +118,8 @@ partitions, or the chunk interval sizes.
 
 </procedure>
 
+## Troubleshooting
+
 ### Troubleshoot version mismatches [](tshoot-version-mismatch)
 The PostgreSQL `pg_dump` command does not allow you to specify which version of
 the extension to use when backing up. This can create problems if you have a
@@ -126,7 +132,25 @@ sure the new PostgreSQL instance has the same extension version as the original
 database before you perform the restore. After the data is restored, you can
 upgrade the version of TimescaleDB.
 
+### Troubleshoot errors when running pg_dump
+You might see the following errors when running `pg_dump`. You can safely ignore
+these. Your hypertable data is still copied.
+
+```bash
+pg_dump: warning: there are circular foreign-key constraints on this table:
+pg_dump:   hypertable
+pg_dump: You might not be able to restore the dump without using --disable-triggers or temporarily dropping the constraints.
+pg_dump: Consider using a full dump instead of a --data-only dump to avoid this problem.
+pg_dump: warning: there are circular foreign-key constraints on this table:
+pg_dump:   chunk
+pg_dump: You might not be able to restore the dump without using --disable-triggers or temporarily dropping the constraints.
+pg_dump: Consider using a full dump instead of a --data-only dump to avoid this problem.
+pg_dump: NOTICE:  hypertable data are in the chunks, no data will be copied
+DETAIL:  Data for hypertables are stored in the chunks of a hypertable so COPY TO of a hypertable will not copy any data.
+HINT:  Use "COPY (SELECT * FROM &lt;hypertable&gt;) TO ..." to copy all data in hypertable, or copy each chunk individually.
+```
+
+[parallel importer]: https://github.com/timescale/timescaledb-parallel-copy
 [pg_dump]: https://www.postgresql.org/docs/current/static/app-pgdump.html
 [pg_restore]: https://www.postgresql.org/docs/current/static/app-pgrestore.html
 [timescaledb-upgrade]: /how-to-guides/update-timescaledb/
-[parallel importer]: https://github.com/timescale/timescaledb-parallel-copy
