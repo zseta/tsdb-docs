@@ -22,16 +22,16 @@ instead.
     instructions, see the [Docker installation documentation][docker-install].
 1.  At the command prompt, run the TimescaleDB Docker image:
     ```bash
-    docker pull timescale/timescaledb:latest-pg14
+    docker pull timescale/timescaledb-ha:pg14-latest
     ```
 
 <highlight type="important">
-The `timescaledb` image is a lightweight image recommended for most TimescaleDB
-users. If you need to use
-[TimescaleDB Toolkit](https://github.com/timescale/timescaledb-toolkit),
-PostGIS, or Patroni for high availability, use the
-[`timescaledb-ha`](https://hub.docker.com/r/timescale/timescaledb-ha) image
-instead.
+The [`timescaledb-ha`](https://hub.docker.com/r/timescale/timescaledb-ha) image
+offers the most complete TimescaleDB experience. It
+includes the 
+[TimescaleDB Toolkit](https://github.com/timescale/timescaledb-toolkit), 
+and support for PostGIS and Patroni. If you need the smallest possible image, use
+the `timescale/timescaledb:latest-pg14` image instead.
 </highlight>
 
 </procedure>
@@ -198,10 +198,10 @@ if you want to have a chat.
 
 
 [contact]: https://www.timescale.com/contact
-[install-psql]: timescaledb/:currentVersion:/how-to-guides/connecting/psql/
-[tsdb-docs]: timescaledb/:currentVersion:/
+[install-psql]: /timescaledb/:currentVersion:/how-to-guides/connecting/psql/
+[tsdb-docs]: /timescaledb/:currentVersion:/
 [tutorials]: /timescaledb/:currentVersion:/tutorials/
-[config]: timescaledb/:currentVersion:/how-to-guides/configuration/
+[config]: /timescaledb/:currentVersion:/how-to-guides/configuration/
 [docker-install]: https://docs.docker.com/get-docker/
 [official-image]: https://github.com/docker-library/postgres/
 [alpine Linux]: https://alpinelinux.org/
