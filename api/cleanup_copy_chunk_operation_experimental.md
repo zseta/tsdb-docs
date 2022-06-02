@@ -4,6 +4,8 @@ excerpt: Clean up after a failed chunk move or chunk copy operation
 license: community
 ---
 
+import Experimental from '../../../_partials/_experimental.mdx';
+
 ## cleanup_copy_chunk_operation() <tag type="community">Community</tag> <tag type="experimental">Experimental</tag>
 You can [copy][copy_chunk] or [move][move_chunk] a
 chunk to a new location within a multi-node environment. The
@@ -14,11 +16,7 @@ prevents storage from being reclaimed. The operation ID is logged in
 case of a failed copy or move operation and is required as input to
 the cleanup function.
 
-<highlight type="warning">
-Experimental features could have bugs! They might not be backwards compatible,
-and could be removed in future releases. Use these features at your own risk, and
-do not use any experimental features in production.
-</highlight>
+<Experimental />
 
 ### Required arguments
 
