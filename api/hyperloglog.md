@@ -46,10 +46,10 @@ SELECT hyperloglog(64, weights) FROM samples;
 ```
 
 Alternatively, you can build a view from the aggregate that you can pass to
-other `tdigest` functions:
+other `hyperloglog` functions:
 
 ``` sql
-CREATE VIEW digest AS SELECT hyperloglog(64, data) FROM samples;
+CREATE VIEW hll AS SELECT hyperloglog(64, data) FROM samples;
 ```
 
 

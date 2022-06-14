@@ -67,7 +67,7 @@ SELECT tdigest(100, data) FROM samples;
 ```
 
 This example builds a view from the aggregate that can be passed to other
-tdigest functions:
+`tdigest` functions:
 ```SQL
 CREATE VIEW digest AS
     SELECT tdigest(100, data)
