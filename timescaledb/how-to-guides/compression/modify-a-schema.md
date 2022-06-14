@@ -1,19 +1,41 @@
 # Schema modifications
-In TimescaleDB 2.1 and later, you can modify the table definition for hypertables with compressed chunks by adding nullable columns, and renaming existing columns.
+You can modify the schema of compressed hypertables in recent versions of
+TimescaleDB.
 
-## Add nullable columns
+|Schema modification|Before TimescaleDB 2.1|TimescaleDB 2.1 to 2.5|TimescaleDB 2.6 and above|
+|-|-|-|-|
+|Add a nullable column|❌|✅|✅|
+|Add a column with a default value and a `NOT NULL` constraint|❌|❌|✅|
+|Rename a column|❌|✅|✅|
+|Drop a column|❌|❌|✅|
+
+## Add a nullable column
 To add a nullable column:
 ```sql
 ALTER TABLE <hypertable> ADD COLUMN <column_name> <datatype>;
 ```
-Note that adding constraints to the new column is not supported.
 
 For example:
 ```sql
 ALTER TABLE conditions ADD COLUMN device_id integer;
 ```
+Note that adding constraints to the new column is not supported before
+TimescaleDB 2.6.
 
-## Rename columns
+## Add a column with a default value and a NOT NULL constraint
+To add a column with a default value and a not-null constraint:
+```sql
+ALTER TABLE <hypertable> ADD COLUMN <column_name> <datatype>
+    NOT NULL DEFAULT <default_value>;
+```
+
+For example:
+```sql
+ALTER TABLE conditions ADD COLUMN device_id integer
+    NOT NULL DEFAULT 1;
+```
+
+## Rename a column
 To rename a column:
 ```sql
 ALTER TABLE <hypertable> RENAME <column_name> TO <new_name>;
@@ -22,4 +44,16 @@ ALTER TABLE <hypertable> RENAME <column_name> TO <new_name>;
 For example:
 ```sql
 ALTER TABLE conditions RENAME device_id TO devid;
+```
+
+## Drop a column
+You can drop a column from a compressed hypertable, so long as the column is not
+an `orderby` or `segmentby` column. To drop a column:
+```sql
+ALTER TABLE <hypertable> DROP COLUMN <column_name>;
+```
+
+For example:
+```sql
+ALTER TABLE conditions DROP COLUMN temperature;
 ```
