@@ -2,7 +2,7 @@
 You can modify the schema of compressed hypertables in recent versions of
 TimescaleDB.
 
-|Schema modification|Before TimescaleDB 2.1|TimescaleDB 2.1 to 2.5|TimescaleDB 2.6 and above|
+|Schema modification|Before TimescaleDB&nbsp;2.1|TimescaleDB&nbsp;2.1 to 2.5|TimescaleDB&nbsp;2.6 and above|
 |-|-|-|-|
 |Add a nullable column|❌|✅|✅|
 |Add a column with a default value and a `NOT NULL` constraint|❌|❌|✅|
@@ -47,8 +47,8 @@ ALTER TABLE conditions RENAME device_id TO devid;
 ```
 
 ## Drop a column
-You can drop a column from a compressed hypertable, so long as the column is not
-an `orderby` or `segmentby` column. To drop a column:
+You can drop a column from a compressed hypertable, if the column is not an
+`orderby` or `segmentby` column. To drop a column:
 ```sql
 ALTER TABLE <hypertable> DROP COLUMN <column_name>;
 ```
